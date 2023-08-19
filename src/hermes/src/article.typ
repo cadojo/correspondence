@@ -6,6 +6,7 @@
 #import "../../rolo/rolo.typ": *
 
 #let builtin-columns = columns
+#let builtin-outline = outline
 
 #let article(
     title: none,
@@ -16,11 +17,15 @@
     columns: 2,
     header: none,
     footer: none,
+    margin: 0.75in,
+    font: "New Computer Modern",
+    mono: "New Computer Modern Mono",
+    outline: true,
     content,
 ) = {
 
-    set text(11pt, font: "New Computer Modern")
-    show raw: set text(font: "New Computer Modern Mono")
+    set text(11pt, font: font)
+    show raw: set text(font: mono)
     
     set par(justify: true)
     set heading(numbering: "1.1 ")
@@ -32,7 +37,7 @@
     set page(
         paper: "us-letter", 
         header: header,
-        margin: 0.5in,
+        margin: margin,
         footer: if some(footer) { footer } else {
           set text(rgb(75,75,75))
           place(left, align(left, title))
@@ -61,7 +66,12 @@
     }
 
     titleblock
+
     builtin-columns(columns)[
+
+        #if outline {
+            builtin-outline(title: "Table of Contents", indent: auto, depth: 2)
+        }
         #content
     ]
 }

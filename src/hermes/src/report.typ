@@ -7,16 +7,6 @@
 
 #let builtin-outline = outline
 
-#let description(body) = {
-
-    set text(14pt)
-
-    v(1fr)
-    body
-    v(2fr)
-    pagebreak()
-}
-
 #let report(
     title: none,
     author: author(),
@@ -43,12 +33,25 @@
             text(32pt, theme, "Chapter " + counter(heading).display())
             v(2em)
             text(32pt, theme, h.body)
+            v(1fr)
         } else {
             align(center, text(32pt, theme, h))
         }
     }
 
-    show heading.where(level: 2): set text(18pt)
+    show heading.where(level: 2): h => {
+        set text(18pt)
+        locate(
+            loc => {
+                let count = counter(heading).at(loc).at(1)
+                if count == 1 {
+                    v(2fr)
+                    pagebreak(weak: true)
+                }
+            }
+        )
+        h
+    }
     show heading.where(level: 3): set text(14pt)
 
     show builtin-outline.entry.where(
