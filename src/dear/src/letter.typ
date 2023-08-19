@@ -2,12 +2,12 @@
 // Preamble
 //
 
-#import "affiliation.typ": *
+#import "../../rolo/rolo.typ": *
+#import "../../options/options.typ": some
 
 #let letter(
-  sender: affiliation(),
-  recipient: affiliation(),
-  contact: contact(),
+  sender: author(),
+  recipient: author(),
   subject: none,
   logo: none,
   date: datetime.today().display("[month repr:long] [day], [year]"),
@@ -38,15 +38,15 @@
       stack(
       dir: ttb,
         spacing: 1em,
-        ..(fullname(sender), sender.role, sender.department, sender.organization).filter(some),
+        ..(fullname(sender.name), sender.roles, sender.affiliations.department, sender.affiliations.name).filter(some),
         ..address(sender),
       )
     }
     
-    let socials = if contact == none {
+    let socials = if sender == none {
       none 
     } else {
-      (contact.phone, contact.website, contact.email).filter(some)
+      (sender.phone, sender.url, sender.email).filter(some)
     }
 
     let to = if recipient == none {
@@ -55,7 +55,7 @@
       stack(
       dir: ttb,
         spacing: 1em,
-        ..(fullname(recipient), recipient.role, recipient.department, recipient.organization).filter(some),
+        ..(fullname(recipient.name), recipient.roles, recipient.affiliations.department, recipient.affiliations.name).filter(some),
         ..address(recipient),
       )
     }
@@ -94,18 +94,18 @@
 
 
     if some(greeting) and some(recipient) and some(recipient.name) {
-      pad(bottom: 1em, greeting + " " + name(recipient) + ",")
+      pad(bottom: 1em, greeting + " " + nickname(recipient.name) + ",")
     }
 
     body
 
-    if some(closing) and some(sender) and some(name(sender)) {
+    if some(closing) and some(sender) and some(sender.name) {
       pad(
         top: 1em, 
         {
           closing + ","
           linebreak()
-          text(weight: "bold", name(sender))
+          text(weight: "bold", nickname(sender.name))
         }
       )
     }

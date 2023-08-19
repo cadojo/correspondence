@@ -1,14 +1,11 @@
-#import "affiliation.typ": *
-
 //
 // Preamble
 //
 
-#import "affiliation.typ": *
+#import "../../rolo/rolo.typ": *
 
 #let statement(
-  sender: affiliation(),
-  contact: contact(),
+  sender: author(),
   logo: none,
   title: "Statement of Purpose",
   date: datetime.today().display("[month repr:long] [day], [year]"),
@@ -30,9 +27,9 @@
       if divider {
         pad(top: 1em, line(length: 100%, stroke: 1pt + black))
       }
-      if some(sender) or some(contact) {
+      if some(sender) {
         set text(rgb(75,75,75))
-        stack(dir: ltr, spacing: 1fr, ..(fullname(sender), if some(contact) { contact.email } else { none }).filter(some))
+        stack(dir: ltr, spacing: 1fr, ..(fullname(sender), sender.email).filter(some))
       }
 
     } else {
