@@ -12,7 +12,7 @@
   if src == none {
     body
   } else {
-    stack(dir: ltr, move(dy: 0.4em, image(src, height: 1.5em)), h(0.5em), body)
+    stack(dir: ltr, move(dy: 0.4em, src), h(0.5em), body)
   }
 }
 

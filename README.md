@@ -47,5 +47,5 @@ This is a personal statement!
 ## License
 
 All content in this repository is covered by the top-level [MIT License](/LICENSE),
-**except** for the icons under `src/vita/icons`. The icons are **not** my creation,
-and are covered by their own [MIT License](/src/vita/icons/ICONOIR).
+**except** for the icons under `src/icons`. The icons are **not** my creation,
+and are covered by their own [MIT License](/src/icons/ICONOIR).

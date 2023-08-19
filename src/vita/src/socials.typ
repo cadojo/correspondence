@@ -6,7 +6,7 @@
   let social = if icon == none {
     name
   } else {
-    box(image("../" + icon, height: 1.5em), baseline: 20%)
+    box(icon, baseline: 20%)
     h(1em)
     name
   }
