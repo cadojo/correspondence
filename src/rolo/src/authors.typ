@@ -34,7 +34,7 @@
     affiliations: affiliations,
 )
 
-#let address(author) = (
+#let address(author) = {
     if some(author) {
         let state = (author.affiliations.region, author.affiliations.postal-code).filter(some).join(" ")
         let location = (author.affiliations.city, state).filter(some).join(", ")
@@ -42,5 +42,22 @@
     } else {
         none
     }
-)
-
+}
+#let authorblock(author) = {
+    if some(author) {
+        set align(center)
+        stack(
+            dir: ttb,
+            spacing: 0.65em,
+            ..(
+                text(weight: "semibold", fullname(author.name)),
+                author.email,
+                author.orcid,
+                author.affiliations.department,
+                author.affiliations.name,
+            ).filter(some)
+        )
+    } else {
+        none
+    }
+}
