@@ -29,7 +29,14 @@
       }
       if some(sender) {
         set text(rgb(75,75,75))
-        stack(dir: ltr, spacing: 1fr, ..(fullname(sender), sender.email).filter(some))
+        stack(dir: ltr, spacing: 1fr, ..(
+          fullname(sender.name), 
+          if some(sender.email) { 
+            sender.email
+          } else { 
+            none 
+          }
+        ).filter(some))
       }
 
     } else {
