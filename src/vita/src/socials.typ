@@ -14,13 +14,12 @@
   socialslist.update(current => current + (social,))
 }
 
-#let socials(header: "Social Media", color: white, size: 11pt) = {
+#let socials(header: "Social Media") = {
   locate(
     loc => {
       let socialslist = socialslist.final(loc)
       if socialslist.len() > 0 {
-        heading(level: 1, text(color, header))
-        set text(color, size: size)
+        heading(level: 1, header)
         block(
           align(left)[#socialslist.join("\n")]
         )

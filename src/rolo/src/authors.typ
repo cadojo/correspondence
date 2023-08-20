@@ -1,6 +1,6 @@
-#import "names.typ": name, fullname
-#import "attributes.typ": attributes
-#import "affiliations.typ": affiliation
+#import "names.typ": *
+#import "attributes.typ": *
+#import "affiliations.typ": *
 
 #import "../../options/options.typ": some
 
@@ -17,7 +17,7 @@
     attributes: attributes(),
     roles: none,
     metadata: none,
-    affiliations: affiliation(),
+    affiliation: affiliation(),
 ) = (
     number: number,
     name: name,
@@ -31,21 +31,35 @@
     attributes: attributes,
     roles: roles,
     metadata: metadata,
-    affiliations: affiliations,
+    affiliation: affiliation,
 )
 
 #let address(author) = {
     if some(author) {
-        let state = (author.affiliations.region, author.affiliations.postal-code).filter(some).join(" ")
-        let location = (author.affiliations.city, state).filter(some).join(", ")
-        (location, author.affiliations.country).filter(some)
+        let state = (author.affiliation.region, author.affiliation.postal-code).filter(some).join(" ")
+        let location = (author.affiliation.city, state).filter(some).join(", ")
+        (author.affiliation.address, location, author.affiliation.country).filter(some)
     } else {
         none
     }
 }
+
+#let contact(author) = {
+    if some(author) { 
+        (
+            author.phone,
+            author.email,
+            author.fax,
+            author.url,
+            author.orcid,
+        ).filter(some)
+    } else {
+        none
+    }
+}
+
 #let authorblock(author) = {
     if some(author) {
-        set align(center)
         stack(
             dir: ttb,
             spacing: 0.65em,
@@ -53,8 +67,8 @@
                 text(weight: "semibold", fullname(author.name)),
                 author.email,
                 author.orcid,
-                author.affiliations.department,
-                author.affiliations.name,
+                author.affiliation.department,
+                author.affiliation.name,
             ).filter(some)
         )
     } else {

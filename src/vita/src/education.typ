@@ -16,15 +16,15 @@
   
   let content = [
     #grid(
-      columns: (70%, 28%, 1fr),
-      heading(level: 2, (title, field).join(" ")),
+      columns: (1fr, 1fr),
+      heading(level: 3, (title, field).join(" ")),
       align(right)[
         #duration(start, stop)
       ]
     )
     #if school != none {
       set text(rgb(90,90,90), weight: "regular")
-      v(-0.75em)
+      v(-0.5em)
       school
     }
     #notes
@@ -33,13 +33,13 @@
   degreeslist.update(current => current + (content,))
 }
 
-#let degrees(header: "Education", size: 11pt) = {
+#let degrees(header: "Education") = {
   locate(
     loc => {
       let content = degreeslist.final(loc)
       if content.len() > 0 {
-        heading(level: 1, header)
-        line(length: 97%)
+        heading(level: 2, header)
+        line(length: 100%, stroke: 1pt + black)
         content.join()
       }
     }

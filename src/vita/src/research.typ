@@ -1,11 +1,10 @@
-#let experiencelist = state("experiencelist", ())
+#let researchlist = state("researchlist", ())
 
-#let experience(
+#let research(
   organization,
   role: none,
   start: none,
   stop: none, 
-
   notes
 ) = {
   let content = [
@@ -30,16 +29,16 @@
     #notes
   ]
 
-  experiencelist.update(current => current + (content,))
+  researchlist.update(current => current + (content,))
 }
-#let experiences(header: "Professional Experience") = {
+#let researching(header: "Research Experience") = {
   locate(
     loc => {
-      let experiencelist = experiencelist.final(loc)
-      if experiencelist.len() > 0 {
+      let researchlist = researchlist.final(loc)
+      if researchlist.len() > 0 {
         heading(level: 2, text(header))
         line(length: 100%, stroke: 1pt + black)
-        experiencelist.join()
+        researchlist.join()
       }
     }
   )

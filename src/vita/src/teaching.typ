@@ -1,6 +1,6 @@
-#let experiencelist = state("experiencelist", ())
+#let teachinglist = state("teachinglist", ())
 
-#let experience(
+#let teaching(
   organization,
   role: none,
   start: none,
@@ -10,7 +10,7 @@
 ) = {
   let content = [
     #grid(
-      columns: (1fr, 1fr),
+      columns: (65%, 33%, 1fr),
       heading(level: 3, organization),
       align(right)[
         #set text(rgb(90,90,90))
@@ -30,16 +30,16 @@
     #notes
   ]
 
-  experiencelist.update(current => current + (content,))
+  teachinglist.update(current => current + (content,))
 }
-#let experiences(header: "Professional Experience") = {
+#let teachings(header: "Teaching Experience") = {
   locate(
     loc => {
-      let experiencelist = experiencelist.final(loc)
-      if experiencelist.len() > 0 {
+      let teachinglist = teachinglist.final(loc)
+      if teachinglist.len() > 0 {
         heading(level: 2, text(header))
         line(length: 100%, stroke: 1pt + black)
-        experiencelist.join()
+        teachinglist.join()
       }
     }
   )

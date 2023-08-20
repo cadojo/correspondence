@@ -16,7 +16,7 @@
       let skillslist = skillslist.final(loc)
       if skillslist.len() > 0 {
         heading(level: 1, header)
-        line(length: 97%)
+        line(length: 100%, stroke: 1pt + black)
         skillslist.join()
       }
     }

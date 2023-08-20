@@ -19,13 +19,12 @@
   projectslist.update(current => current + (title,))
 }
 
-#let projects(header: "Personal Projects", color: white, size: 9pt) = {
+#let projects(header: "Personal Projects") = {
   locate(
     loc => {
       let projectslist = projectslist.final(loc)
       if projectslist.len() > 0 {
-        heading(level:1, text(color, header))
-        set text(color, size: size)
+        heading(level:2, header)
         projectslist.join()
       }
     }

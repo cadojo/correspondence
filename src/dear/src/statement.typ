@@ -23,7 +23,7 @@
     show par: set block(spacing: 1.5em)
 
     let titleblock = if some(title) { 
-      align(center, heading(level: 1, text(size: 22pt, title)))
+      align(center, heading(level: 1, text(size: 26pt, title)))
       if divider {
         pad(top: 1em, line(length: 100%, stroke: 1pt + black))
       }
