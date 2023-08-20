@@ -64,7 +64,7 @@
             right, 
             stack(
               dir: ttb,
-              spacing: 2em,
+              spacing: 1em,
               heading(level: 3, title),
               if url != none {
                 text(9pt, style: "italic", "Available at " + url)
