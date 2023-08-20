@@ -59,12 +59,12 @@
           #heading(level: 1, name)
         ],
         [
-          #v(1.5em)
+          #v(2em)
           #align(
             right, 
             stack(
               dir: ttb,
-              spacing: 1em,
+              spacing: 1.5em,
               heading(level: 3, title),
               if url != none {
                 text(9pt, style: "italic", "Available at " + url)
