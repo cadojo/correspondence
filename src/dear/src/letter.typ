@@ -21,8 +21,8 @@
 
     set stack(spacing: 1em)
     set text(font: "New Computer Modern", size: 12pt)
+    set par(justify: true)
     show par: set block(spacing: 1.5em)
-    show link: set text(weight: "bold")
 
     set page(
         margin: (
@@ -96,6 +96,8 @@
     if some(greeting) and some(recipient) and some(recipient.name) {
       pad(bottom: 1em, greeting + " " + nickname(recipient.name) + ",")
     }
+
+    show link: set text(theme, weight: "semibold")
 
     body
 

@@ -35,7 +35,7 @@
             name
         }
         else if name.literal != none {
-            name.literal.split().at(0)
+            name.literal
         } else {
             name.given
         }
