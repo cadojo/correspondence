@@ -12,7 +12,7 @@
   }
 
   let title = [
-    #heading(level: 2, banner)
+    #heading(level: 3, banner)
     #text(style: "italic", description)
   ]
 
@@ -24,7 +24,7 @@
     loc => {
       let projectslist = projectslist.final(loc)
       if projectslist.len() > 0 {
-        heading(level:2, header)
+        heading(level: 2, header)
         projectslist.join()
       }
     }

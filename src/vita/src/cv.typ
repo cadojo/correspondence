@@ -31,7 +31,6 @@
     show heading.where(level: 2): set text(16pt, theme)
     show heading.where(level: 3): set text(12pt)
 
-
     set stack(spacing: 1em)
     set text(font: "New Computer Modern", size: 10pt)
     set par(justify: true)

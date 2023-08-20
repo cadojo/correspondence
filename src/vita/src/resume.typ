@@ -12,7 +12,7 @@
   if src == none {
     body
   } else {
-    stack(dir: ltr, move(dy: 0.4em, src), h(0.5em), body)
+    stack(dir: ltr, spacing: 0.5em, move(dy: 0.5em, src), h(0.5em), body)
   }
 }
 
@@ -24,14 +24,16 @@
   url: none,
   theme: rgb(120,120,120),
   body: stack(spacing: 1.25em, experiences(), degrees(), skills()),
-  side: stack(projects(), socials(),),
+  side: stack(projects(), socials()),
   metadata,
 ) = {
+  show heading.where(level: 1): set text(32pt, black)
+  show heading.where(level: 2): set text(18pt)
+  show heading.where(level: 3): set text(12pt)
 
+  set stack(spacing: 1em)
+  set text(size: 9pt)
   show link: set text(weight: "bold")
-  set text(
-    size: 9pt,
-  )
 
   set page(
     margin: (
@@ -54,9 +56,7 @@
       grid(
         columns: (1.75fr, 1fr),
         [
-          #v(2em)
-          #set text(34pt, weight: "bold")
-          #name
+          #heading(level: 1, name)
         ],
         [
           #v(1.5em)
@@ -65,7 +65,7 @@
             stack(
               dir: ttb,
               spacing: 2em,
-              text(18pt, title),
+              heading(level: 3, title),
               if url != none {
                 text(9pt, style: "italic", "Available at " + url)
               }
@@ -75,10 +75,10 @@
       ),
       none,
       [
-        #set text(size: 11pt, white)
-        #v(1em)
-        #block(
+        #pad(
+          top: 1em,
           align(left)[
+            #set text(white, 11pt)
             #stack(
               dir: ttb,
               spacing: 1.75em,
@@ -91,9 +91,6 @@
     ),
    header-ascent: 0.5in,
   )
-  
-  show heading.where(level: 1): set text(size: 20pt, theme.darken(10%))
-  show heading.where(level: 2): set text(size: 13pt)
 
   metadata
 
@@ -102,17 +99,16 @@
     stack(
       dir: ttb,
       spacing: 1.5em,
-      body,
+      [
+        #show heading.where(level: 2): set text(theme)
+        #show heading.where(level: 2): set align(left)
+        #body
+      ],
     ), "",
-    stack(dir: ttb)[
-      #locate(
-        loc => {
-          show heading.where(level: 1): set text(white)
-          show heading.where(level: 1): set align(center)
-          set text(white)
-          side
-        }
-      )   
+    [
+      #set text(white)
+      #show heading.where(level: 2): set align(center)
+      #side
     ]
   )
 }

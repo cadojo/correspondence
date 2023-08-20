@@ -19,7 +19,7 @@
     loc => {
       let socialslist = socialslist.final(loc)
       if socialslist.len() > 0 {
-        heading(level: 1, header)
+        heading(level: 2, header)
         block(
           align(left)[#socialslist.join("\n")]
         )

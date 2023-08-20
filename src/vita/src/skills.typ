@@ -4,7 +4,7 @@
   name, notes,
 ) = {
   let title = [
-    #heading(level: 2, name)
+    #heading(level: 3, name)
     #notes
   ]
 
@@ -15,11 +15,10 @@
     loc => {
       let skillslist = skillslist.final(loc)
       if skillslist.len() > 0 {
-        heading(level: 1, header)
+        heading(level: 2, header)
         line(length: 100%, stroke: 1pt + black)
         skillslist.join()
       }
     }
   )
-
 }
