@@ -38,7 +38,7 @@
       stack(
       dir: ttb,
         spacing: 1em,
-        ..(fullname(sender.name), sender.roles, sender.affiliations.department, sender.affiliations.name).filter(some),
+        ..(fullname(sender.name), sender.roles, sender.affiliation.department, sender.affiliation.name).filter(some),
         ..address(sender),
       )
     }
@@ -55,7 +55,7 @@
       stack(
       dir: ttb,
         spacing: 1em,
-        ..(fullname(recipient.name), recipient.roles, recipient.affiliations.department, recipient.affiliations.name).filter(some),
+        ..(fullname(recipient.name), recipient.roles, recipient.affiliation.department, recipient.affiliation.name).filter(some),
         ..address(recipient),
       )
     }
