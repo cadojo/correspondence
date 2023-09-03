@@ -17,28 +17,32 @@
     attributes: attributes(),
     roles: none,
     metadata: none,
-    affiliation: affiliation(),
-) = (
-    number: number,
-    name: name,
-    url: url,
-    email: email,
-    phone: phone,
-    fax: fax,
-    orcid: orcid,
-    note: note,
-    acknowledgements: acknowledgements,
-    attributes: attributes,
-    roles: roles,
-    metadata: metadata,
-    affiliation: affiliation,
-)
+    affiliations: (affiliation(),),
+) = {
+    let affil = if type(affiliations) == "array" {affiliations} else {(affiliations,)}
+    (
+        number: number,
+        name: name,
+        url: url,
+        email: email,
+        phone: phone,
+        fax: fax,
+        orcid: orcid,
+        note: note,
+        acknowledgements: acknowledgements,
+        attributes: attributes,
+        roles: roles,
+        metadata: metadata,
+        affiliations: affil,
+    )
+}
 
 #let address(author) = {
+    let affil = author.affiliations.at(0)
     if some(author) {
-        let state = (author.affiliation.region, author.affiliation.postal-code).filter(some).join(" ")
-        let location = (author.affiliation.city, state).filter(some).join(", ")
-        (author.affiliation.address, location, author.affiliation.country).filter(some)
+        let state = (affil.region, affil.postal-code).filter(some).join(" ")
+        let location = (affil.city, state).filter(some).join(", ")
+        (affil.address, location, affil.country).filter(some)
     } else {
         none
     }
@@ -59,6 +63,7 @@
 }
 
 #let authorblock(author) = {
+    let affil = author.affiliations.at(0)
     if some(author) {
         stack(
             dir: ttb,
@@ -67,8 +72,8 @@
                 text(weight: "semibold", fullname(author.name)),
                 author.email,
                 author.orcid,
-                author.affiliation.department,
-                author.affiliation.name,
+                affil.department,
+                affil.name,
             ).filter(some)
         )
     } else {

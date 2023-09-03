@@ -15,6 +15,8 @@
   greeting: "Dear",
   closing: "Sincerely",
   divider: true,
+  header: none,
+  footer: "default",
   body,
 ) = {
 
@@ -25,12 +27,26 @@
     show par: set block(spacing: 1.5em)
 
     set page(
-        margin: (
-          top: 0.5in,
-          rest: 0.75in,
-        ),
-        header-ascent: 0%,
+        header: header,
+        footer: if type(footer) == "string" and lower(footer) == "default" {
+          locate(loc => {
+            let pages = counter(page).final(loc).at(0)
+            if pages > 1 {
+              set text(rgb(75,75,75))
+              place(left, align(left, subject))
+
+              place(right, align(right, counter(page).display("1 / 1", both: true)))
+            }
+          }
+          
+          )
+
+        } else { 
+          footer 
+        },
     )
+
+    if header == none { v(-0.5in) }
 
     let from = if sender == none {
       none
@@ -38,7 +54,7 @@
       stack(
       dir: ttb,
         spacing: 1em,
-        ..(fullname(sender.name), sender.roles, sender.affiliation.department, sender.affiliation.name).filter(some),
+        ..(fullname(sender.name), sender.roles, sender.affiliations.at(0).department, sender.affiliations.at(0).name).filter(some),
         ..address(sender),
       )
     }
@@ -55,7 +71,7 @@
       stack(
       dir: ttb,
         spacing: 1em,
-        ..(fullname(recipient.name), recipient.roles, recipient.affiliation.department, recipient.affiliation.name).filter(some),
+        ..(fullname(recipient.name), recipient.roles, recipient.affiliations.at(0).department, recipient.affiliations.at(0).name).filter(some),
         ..address(recipient),
       )
     }
@@ -93,11 +109,21 @@
     }
 
 
-    if some(greeting) and some(recipient) and some(recipient.name) {
-      pad(bottom: 1em, greeting + " " + nickname(recipient.name) + ",")
+    if some(greeting) {
+      to = if some(nickname(recipient.name)) {
+        nickname(recipient.name)
+      } else if some(recipient.roles) {
+        recipient.roles
+      } else {
+        none
+      }
+
+      if some(to) {
+        pad(bottom: 1em, greeting + " " + to + ",")
+      }
     }
 
-    show link: set text(theme, weight: "semibold")
+    show link: set text(theme)
 
     body
 
@@ -105,9 +131,11 @@
       pad(
         top: 1em, 
         {
-          closing + ","
-          linebreak()
-          text(weight: "bold", nickname(sender.name))
+          stack(
+            dir: ttb, 
+            closing + ",",
+            text(weight: "bold", nickname(sender.name))
+          )
         }
       )
     }
