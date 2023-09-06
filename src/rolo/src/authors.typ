@@ -38,11 +38,26 @@
 }
 
 #let address(author) = {
-    let affil = author.affiliations.at(0)
     if some(author) {
-        let state = (affil.region, affil.postal-code).filter(some).join(" ")
-        let location = (affil.city, state).filter(some).join(", ")
-        (affil.address, location, affil.country).filter(some)
+        let affil = author.affiliations.at(0)
+        if some(affil) {
+            let state = (affil.region, affil.postal-code).filter(some).join(" ")
+            let location = (affil.city, state).filter(some).join(", ")
+            (affil.address, location, affil.country).filter(some)
+        } else {
+            none
+        }
+    } else { 
+        none 
+    }
+}
+
+#let shortaddress(author) = {
+    if some(author) {
+        let affil = author.affiliations.at(0)
+        if some(affil) {
+            (affil.city, affil.region).filter(some).join(", ")
+        }
     } else {
         none
     }
