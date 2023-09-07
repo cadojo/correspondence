@@ -54,7 +54,7 @@
     header: grid(
       columns: (67%, 1fr, 29%),
       grid(
-        columns: (1.75fr, 1fr),
+        columns: (1.75fr, 1fr, 1em),
         [
           #heading(level: 1, name)
         ],
@@ -71,7 +71,8 @@
               }
             )
           )
-        ]
+        ],
+        []
       ),
       none,
       [
