@@ -20,9 +20,8 @@
 
 
     set stack(spacing: 1em)
-    set text(font: "New Computer Modern", size: 12pt)
     set par(justify: true)
-    show par: set block(spacing: 1.5em)
+    show par: set block(spacing: 2em)
 
     set page(
         fill: white,
@@ -99,6 +98,7 @@
       move(dx: -0.5in, text(weight: "semibold", "To: "))
       stack(
       dir: ttb,
+      spacing: 0.65em,
         ..(fullname(recipient.name), recipient.roles, recipient.affiliations.at(0).department, recipient.affiliations.at(0).name).filter(some),
         ..address(recipient),
       )
@@ -106,7 +106,7 @@
     // Write
 
     if some(to) {
-      pad(top: 1em, bottom: 1em, align(left, to))
+      align(left, to)
     }
 
     body
