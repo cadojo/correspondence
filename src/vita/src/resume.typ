@@ -27,7 +27,7 @@
   side: stack(projects(), socials()),
   metadata,
 ) = {
-  show heading.where(level: 1): set text(32pt, black)
+  show heading.where(level: 1): set text(28pt, black)
   show heading.where(level: 2): set text(18pt)
   show heading.where(level: 3): set text(12pt)
 
@@ -54,7 +54,7 @@
     header: grid(
       columns: (67%, 1fr, 29%),
       grid(
-        columns: (1.75fr, 1fr, 1em),
+        columns: (2fr, 1fr, 0.5em),
         [
           #heading(level: 1, name)
         ],
@@ -67,7 +67,7 @@
               spacing: 1.5em,
               heading(level: 3, title),
               if url != none {
-                text(9pt, style: "italic", "Available at " + url)
+                text(9pt, style: "italic",url)
               }
             )
           )
