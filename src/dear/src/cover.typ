@@ -77,7 +77,7 @@
                 loc => {
                     let pages = counter(page).final(loc).at(0)
                     if pages > 1 {
-                    set text(rgb(50,50,50))
+                    set text(rgb(125,125,125))
                     place(left, align(left, regarding))
 
                     place(right, align(right, counter(page).display("1 / 1", both: true)))
@@ -94,8 +94,7 @@
     let to = if recipient == none {
       none
     } else { 
-      set text(rgb(50,50,50))
-      move(dx: -0.5in, text(weight: "semibold", "To: "))
+      set text(rgb(125,125,125))
       stack(
       dir: ttb,
       spacing: 0.65em,
