@@ -27,7 +27,7 @@
   side: stack(projects(), socials()),
   metadata,
 ) = {
-  show heading.where(level: 1): set text(28pt, black)
+  show heading.where(level: 1): set text(27pt, black)
   show heading.where(level: 2): set text(18pt)
   show heading.where(level: 3): set text(12pt)
 
