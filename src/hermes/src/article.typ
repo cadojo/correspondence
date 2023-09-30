@@ -10,6 +10,7 @@
 
 #let article(
     title: none,
+    subtitle: none,
     abstract: none,
     author: author(),
     date: datetime.today().display("[month repr:long] [day], [year]"),
@@ -47,8 +48,12 @@
 
     let titleblock = {
         align(center, text(theme, size: 22pt, weight: "bold", smallcaps(title)))
+        if some(subtitle) {
+            align(center, text(black, size: 14pt, weight: "semibold", subtitle))
+        }
 
         if some(author) {
+            set align(center)
             pad(
                 1em,
                 if type(author) == "array" {
@@ -60,14 +65,17 @@
                 }
             )
         }
-        if some(abstract) {
-            pad(top: 1em, bottom: 1em, left: (25% / 2), right: (25% / 2), text(style: "italic", abstract))
-        }
     }
 
     titleblock
 
     builtin-columns(columns)[
+
+        #if some(abstract) {
+            heading(level: 1, numbering: none, outlined: false, smallcaps("abstract"))
+            abstract
+            // pad(top: 1em, bottom: 1em, left: (25% / 2), right: (25% / 2), abstract)
+        }
 
         #if outline {
             builtin-outline(title: "Table of Contents", indent: auto, depth: 2)
